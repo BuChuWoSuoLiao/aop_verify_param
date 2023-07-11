@@ -8,16 +8,12 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * @BelongsPackage: com.liao.aop_verify_param.annotation
- * @Author: Liao YunYang
- * @Description: 验证拦截注解
- * @CreateTime: 2023-07-10  23:41
- * @Version: 1.0
+ * 注解全局拦截器
  */
-@Target({ElementType.METHOD})       // 注解写在方法上
-@Retention(RetentionPolicy.RUNTIME) // 运行时触发
+@Target({ElementType.METHOD})   // 将注解定义在方法上
+@Retention(RetentionPolicy.RUNTIME) // 在执行的时候触发
 @Mapping
-public @interface ParamInterceptor {
+public @interface GlobalInterceptor {
 
     /**
      * 校验参数
@@ -31,5 +27,12 @@ public @interface ParamInterceptor {
      *
      * @return
      */
-    boolean checkLogin() default false;
+    boolean checkLogin() default true;
+
+    /**
+     * 校验超级管理员
+     *
+     * @return
+     */
+    boolean checkAdmin() default false;
 }

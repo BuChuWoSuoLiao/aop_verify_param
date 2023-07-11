@@ -1,38 +1,45 @@
 package com.liao.aop_verify_param.annotation;
 
+import com.liao.aop_verify_param.enums.VerifyRegexEnum;
+
 import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * @BelongsPackage: com.liao.aop_verify_param.annotation
- * @Author: Liao YunYang
- * @Description: 用户获取参数的注解
- * @CreateTime: 2023-07-10  23:45
- * @Version: 1.0
+ * 校验参数的注解定义
  */
-@Target({ElementType.FIELD})  // 可以将注解定义在字段上
+@Target({ElementType.PARAMETER, ElementType.FIELD}) // 可以定义在字段和形参上
+@Retention(RetentionPolicy.RUNTIME) // 启动的时候生效
 public @interface VerifyParam {
     /**
-     * 最小长度
-     * 默认值为 -1
+     * 校验最小长度
      *
      * @return
      */
-    int minLen() default -1;
+    int min() default -1;
 
     /**
-     * 最大长度
-     * 默认值为 -1
+     * 校验最大长度
      *
      * @return
      */
-    int maxLen() default -1;
+    int max() default -1;
 
     /**
-     * 是否校验参数
+     * 校验正则
+     *
+     * @return
+     */
+    VerifyRegexEnum regex() default VerifyRegexEnum.NO;
+
+    /**
+     * 是否校验
      * 必填项
      *
      * @return
      */
-    boolean whetherCheck() default false;
+    boolean required() default false;
+
 }
